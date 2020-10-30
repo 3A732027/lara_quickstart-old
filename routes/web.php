@@ -36,6 +36,10 @@ Route::post('/task', function (Request $request) {
     }
     // 建立該任務...
     //新增任務存入DB的程式碼 (see next page)
+    $task = new Task;
+    $task->name = $request->name;
+    $task->save();
+    return redirect('/');
 });
 // 刪除任務
 Route::delete('/task/{task}', function (Task $task) {
