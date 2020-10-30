@@ -25,7 +25,17 @@ Route::get('/', function () {
 });
 // 增加新的任務
 Route::post('/task', function (Request $request) {
-    //
+    // 驗證輸入
+    $validator = Validator::make($request->all() , [
+        'name' => 'required|max:255',
+    ]);
+    if ($validator->fails()) {
+        return redirect('/')
+            ->withInput()
+            ->withErrors($validator);
+    }
+    // 建立該任務...
+    //新增任務存入DB的程式碼 (see next page)
 });
 // 刪除任務
 Route::delete('/task/{task}', function (Task $task) {
